@@ -1,0 +1,9 @@
+body {
+  margin-top: 2em;
+}
+
+span.frac {
+  font-family: 'Georgia', serif;
+  font-size: 1.2em;
+  font-weight: bold;
+}
