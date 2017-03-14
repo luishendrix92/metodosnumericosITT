@@ -1,0 +1,1 @@
+{:rename-macros {}, :renames {}, :use-macros {}, :excludes #{}, :name sistemaecdos.core, :imports nil, :requires {sistemaecdos.parser sistemaecdos.parser}, :uses {parse-eq sistemaecdos.parser}, :require-macros nil, :doc nil}
