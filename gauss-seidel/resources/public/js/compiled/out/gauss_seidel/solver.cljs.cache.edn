@@ -1,0 +1,1 @@
+{:rename-macros {}, :renames {}, :use-macros {}, :excludes #{}, :name gauss-seidel.solver, :imports nil, :requires {gauss-seidel.system gauss-seidel.system}, :uses {make-diagonal gauss-seidel.system}, :require-macros nil, :doc nil}
