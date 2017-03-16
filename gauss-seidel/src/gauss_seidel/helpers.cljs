@@ -35,3 +35,13 @@
 ;; map-index :: (a -> Int -> b) -> List a -> List b
 (defn map-index [mapper coll]
   (zip coll (range (count coll)) mapper))
+
+;; Same behaviour as reduce but it also provides the index
+;; reduce-index :: (a -> Int -> b) -> List a -> b
+(defn reduce-index [reducer initial coll]
+  (loop [index 0
+         [head & tail] coll
+         reduced initial]
+    (if (seq tail)
+      (recur (inc index) tail (reducer reduced head index))
+      (reducer reduced head index))))
