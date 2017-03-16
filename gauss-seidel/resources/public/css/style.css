@@ -1,2 +1,21 @@
-/* some style */
+html {
+  background-color: #f9f9f9;
+  padding-top: 20px;
+}
 
+.eq-list {
+  margin-top: 1em;
+}
+
+.welcome {
+  font-size: 0.8em;
+}
+
+.nested-row {
+  background: none !important;
+}
+
+.nested-cell {
+  padding: 3px !important;
+  font-size: 0.8em;
+}

@@ -1,6 +1,5 @@
 (ns gauss-seidel.parser
-  (:require [clojure.string :refer [replace]]
-            [gauss-seidel.helpers :refer [add]]))
+  (:require [clojure.string :refer [replace]]))
 
 (def comp-pattern #"(\-?\d+(?:\.\d+)?)[a-zA-Z]")
 (def indep-pattern #"=(\-?\d+(?:\.\d+)?)$")
@@ -13,7 +12,7 @@
         indep (re-find indep-pattern str-clean)
         [c & xn] (->> str-clean
                       (re-seq comp-pattern)
-                      (add indep)
+                      (cons indep)
                       (map (comp js/parseFloat last)))]
     {:comps xn, :indep c}))
 

@@ -1,45 +1,60 @@
 (ns gauss-seidel.solver
   (:require [gauss-seidel.system :refer [make-diagonal]]
-            [gauss-seidel.helpers :refer [without-nth zip map-index filled-range]]))
+            [gauss-seidel.helpers :refer [remove-at zip map-index
+                                          filled-range]]))
 
-;; acceptable-error? :: Float -> Float -> Boolean
+;; Returns a function that determines if an error is acceptable
+;; by comparing it against a previously given tolerance.
+;; acceptable-error? :: Float -> (Float -> Boolean)
 (defn acceptable-error? [tolerance]
   (fn [err] (<= err tolerance)))
 
+;; Take the current values of x (without the cleared variable) and
+;; multiply them with their corresponding right side coefficient.
 ;; substitute :: Int -> List Float -> List Float -> List Float
 (defn substitute [n xs right-side]
-  (zip right-side (without-nth n xs) *))
+  (zip right-side (remove-at n xs) *))
 
+;; Take two lists of values of x, one for the previous values and one
+;; for the current values, zip and compute their respective errors.
 ;; compute-errs :: List Float -> List Float -> List Float
 (defn compute-errs [prev-xs curr-xs]
   (->> (zip curr-xs prev-xs #(/ (- %1 %2) %1))
        (map (comp (partial * 100) js/Math.abs))))
 
+;; Given an equation and the current values of x, solate the nth variable
+;; by taking it away from xs and the right side of the isolation, then
+;; substitute the values of x in the right side and divide the result.
 ;; isolate :: Equation -> Int -> List Float -> Float
 (defn isolate [equation n xs]
   (let [indep (:indep equation)
         comps (:comps equation)
         divisor (nth comps n)
         right-side (->> comps
-                        (without-nth n)
+                        (remove-at n)
                         (map (partial * -1))
                         (substitute n xs))]
     (/ (reduce + indep right-side) divisor)))
 
+;; Use the previous values of x to determine the next values of x by isolating
+;; the corresponding variable for each equation in the diagonal.
 ;; compute-xs :: Diagonal -> List Float -> List Float
 (defn compute-xs [diagonal xs]
   (->> diagonal
        (map-index #(isolate %1 %2 xs))))
 
+;; The core algorithm of the Gauss-Seidel iterative method, builds up a table
+;; of rows that contain the current iteration number, the values of x and
+;; their current errors that determine when the iteration should stop.
 ;; solve-system :: Diagonal -> Iterated-Table
 (defn solve-system [tolerance diagonal]
-  (loop [xs (filled-range (count diagonal) 0)
-         errs (filled-range (count diagonal) 100)
-         table []
+  (loop [xs (-> diagonal count (filled-range 0))
+         errs (-> diagonal count (filled-range "N/A"))
+         table [[0 xs errs]]
          i 0]
-    (let [row [i xs errs]
-          new-xs (compute-xs diagonal xs)
+    (let [new-xs  (compute-xs diagonal xs)
           new-errs (compute-errs xs new-xs)
+          row [(inc i) new-xs new-errs]
           new-table (conj table row)]
       (if-not (some (acceptable-error? tolerance) new-errs)
         (recur new-xs new-errs new-table (inc i))

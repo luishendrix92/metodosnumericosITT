@@ -6,9 +6,9 @@ var components = new cljs.core.Keyword(null,"comps","comps",1108881715).cljs$cor
 return cljs.core._EQ_.call(null,cljs.core.nth.call(null,components,n),cljs.core.apply.call(null,cljs.core.max,components));
 });
 gauss_seidel.system.valid = (function gauss_seidel$system$valid(system,n){
-var or__24848__auto__ = cljs.core.some.call(null,(function (p1__26366_SHARP_){
-if(cljs.core.truth_(gauss_seidel.system.nth_is_max.call(null,p1__26366_SHARP_,n))){
-return p1__26366_SHARP_;
+var or__24848__auto__ = cljs.core.some.call(null,(function (p1__26213_SHARP_){
+if(cljs.core.truth_(gauss_seidel.system.nth_is_max.call(null,p1__26213_SHARP_,n))){
+return p1__26213_SHARP_;
 } else {
 return null;
 }
@@ -31,10 +31,10 @@ return new cljs.core.Keyword(null,"nothing","nothing",-1022703296);
 if(cljs.core._EQ_.call(null,n,(0))){
 return new_diagonal;
 } else {
-var G__26367 = (n - (1));
-var G__26368 = new_diagonal;
-n = G__26367;
-diagonal = G__26368;
+var G__26214 = (n - (1));
+var G__26215 = new_diagonal;
+n = G__26214;
+diagonal = G__26215;
 continue;
 
 }
@@ -43,4 +43,4 @@ break;
 }
 });
 
-//# sourceMappingURL=system.js.map?rel=1489558867595
+//# sourceMappingURL=system.js.map?rel=1489628674535
