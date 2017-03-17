@@ -28,9 +28,6 @@ goog.addDependency("../devtools/formatters.js", ['devtools.formatters'], ['devto
 goog.addDependency("../devtools/hints.js", ['devtools.hints'], ['cljs.stacktrace', 'cljs.core', 'devtools.context', 'devtools.prefs']);
 goog.addDependency("../devtools/core.js", ['devtools.core'], ['devtools.toolbox', 'devtools.util', 'cljs.core', 'devtools.async', 'devtools.formatters', 'devtools.hints', 'devtools.defaults', 'devtools.prefs']);
 goog.addDependency("../devtools/preload.js", ['devtools.preload'], ['cljs.core', 'devtools.core', 'devtools.prefs']);
-goog.addDependency("../gauss_seidel/system.js", ['gauss_seidel.system'], ['cljs.core']);
-goog.addDependency("../gauss_seidel/helpers.js", ['gauss_seidel.helpers'], ['cljs.core']);
-goog.addDependency("../gauss_seidel/solver.js", ['gauss_seidel.solver'], ['gauss_seidel.system', 'gauss_seidel.helpers', 'cljs.core']);
 goog.addDependency("../reagent/interop.js", ['reagent.interop'], ['cljs.core']);
 goog.addDependency("../react.inc.js", ['cljsjs.react'], []);
 goog.addDependency("../reagent/debug.js", ['reagent.debug'], ['cljs.core']);
@@ -42,9 +39,17 @@ goog.addDependency("../reagent/impl/template.js", ['reagent.impl.template'], ['r
 goog.addDependency("../react-dom.inc.js", ['cljsjs.react.dom'], ['cljsjs.react']);
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'cljsjs.react.dom', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
+goog.addDependency("../gauss_seidel/appstate.js", ['gauss_seidel.appstate'], ['reagent.core', 'cljs.core']);
+goog.addDependency("../gauss_seidel/system.js", ['gauss_seidel.system'], ['cljs.core']);
+goog.addDependency("../gauss_seidel/helpers.js", ['gauss_seidel.helpers'], ['cljs.core']);
+goog.addDependency("../gauss_seidel/solver.js", ['gauss_seidel.solver'], ['gauss_seidel.system', 'gauss_seidel.helpers', 'cljs.core']);
 goog.addDependency("../gauss_seidel/parser.js", ['gauss_seidel.parser'], ['cljs.core', 'clojure.string']);
+goog.addDependency("../gauss_seidel/events.js", ['gauss_seidel.events'], ['gauss_seidel.appstate', 'gauss_seidel.system', 'gauss_seidel.solver', 'cljs.core', 'gauss_seidel.parser']);
+goog.addDependency("../gauss_seidel/eqlist.js", ['gauss_seidel.eqlist'], ['gauss_seidel.appstate', 'cljs.core', 'gauss_seidel.events']);
+goog.addDependency("../gauss_seidel/sidebar.js", ['gauss_seidel.sidebar'], ['gauss_seidel.eqlist', 'gauss_seidel.appstate', 'cljs.core', 'gauss_seidel.events']);
+goog.addDependency("../gauss_seidel/table.js", ['gauss_seidel.table'], ['gauss_seidel.appstate', 'cljs.core']);
 goog.addDependency("../gauss_seidel/modals.js", ['gauss_seidel.modals'], ['cljs.core']);
-goog.addDependency("../gauss_seidel/core.js", ['gauss_seidel.core'], ['gauss_seidel.system', 'gauss_seidel.solver', 'reagent.core', 'cljs.core', 'gauss_seidel.parser', 'gauss_seidel.modals']);
+goog.addDependency("../gauss_seidel/core.js", ['gauss_seidel.core'], ['reagent.core', 'cljs.core', 'gauss_seidel.sidebar', 'gauss_seidel.table', 'gauss_seidel.modals']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers', 'goog.async.nextTick']);
