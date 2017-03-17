@@ -16,9 +16,9 @@
 ;; Sorts the equation system to fit a valid diagonal
 ;; make-diagonal :: System -> Maybe Diagonal
 (defn make-diagonal [system]
-  (loop [n (-> system count dec)
+  (loop [n        (-> system count dec)
          diagonal '()]
-    (let [equation (valid system n)
+    (let [equation     (valid system n)
           new-diagonal (conj diagonal equation)]
       (cond
         (= equation :nothing) :nothing

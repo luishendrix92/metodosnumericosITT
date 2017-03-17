@@ -2,6 +2,7 @@
   (:require [gauss-seidel.parser :refer [parse-eq]]
             [gauss-seidel.system :refer [make-diagonal]]
             [gauss-seidel.solver :refer [solve-system]]
+            [gauss-seidel.modals :refer [no-diag]]
             [reagent.core :as r]))
 
 (enable-console-print!)
@@ -34,7 +35,7 @@
   (swap! state assoc :equations [] :solution []))
 
 (defn row [[i xs errs]]
-  [:tr
+  [:tr {:key i}
    [:th (inc i)]
    [:td [:table
          [:tbody (for [x xs]
@@ -62,11 +63,12 @@
    [:div {:class "card-content"}
     [:div {:class "content"}
      [:p {:class "welcome"} "The following equations will go through a solving-attempt process, bear in mind that the equation system may or may not have a solution:"]
-     [:ul (for [equation (:equations @state)] 
+     [:ul (for [equation (:equations @state)]
             [:li equation])]]]
    [:footer {:class "card-footer"}
-    [:a {:class "card-footer-item" :on-click show-solution} "Solve System"]
-    [:a {:class "card-footer-item" :on-click clear-system} "Clear System"]]])
+    [:a {:class "card-footer-item" :on-click show-solution} "Solve"]
+    [:a {:class "card-footer-item" :on-click #()} "Check"]
+    [:a {:class "card-footer-item" :on-click clear-system} "Clear"]]])
 
 (defn sidebar []
   [:div {:class "column is-one-third"}
@@ -90,6 +92,7 @@
 
 (defn app []
   [:div {:class "columns"}
+   [no-diag]
    [sidebar]
    [table]])
 

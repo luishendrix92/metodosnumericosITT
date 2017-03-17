@@ -1,0 +1,3 @@
+(ns gauss-seidel)
+
+

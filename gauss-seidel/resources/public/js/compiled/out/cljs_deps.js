@@ -43,7 +43,8 @@ goog.addDependency("../react-dom.inc.js", ['cljsjs.react.dom'], ['cljsjs.react']
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'cljsjs.react.dom', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
 goog.addDependency("../gauss_seidel/parser.js", ['gauss_seidel.parser'], ['cljs.core', 'clojure.string']);
-goog.addDependency("../gauss_seidel/core.js", ['gauss_seidel.core'], ['gauss_seidel.system', 'gauss_seidel.solver', 'reagent.core', 'cljs.core', 'gauss_seidel.parser']);
+goog.addDependency("../gauss_seidel/modals.js", ['gauss_seidel.modals'], ['cljs.core']);
+goog.addDependency("../gauss_seidel/core.js", ['gauss_seidel.core'], ['gauss_seidel.system', 'gauss_seidel.solver', 'reagent.core', 'cljs.core', 'gauss_seidel.parser', 'gauss_seidel.modals']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers', 'goog.async.nextTick']);
