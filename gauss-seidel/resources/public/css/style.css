@@ -19,3 +19,12 @@ html {
   padding: 3px !important;
   font-size: 0.8em;
 }
+
+.eq {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.comparison {
+  margin-top: 17px;
+}

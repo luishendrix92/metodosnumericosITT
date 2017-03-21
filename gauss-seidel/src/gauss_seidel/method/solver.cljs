@@ -1,7 +1,6 @@
 (ns gauss-seidel.solver
   (:require [gauss-seidel.system :refer [make-diagonal]]
-            [gauss-seidel.helpers :refer [remove-at zip map-index
-                                          filled-range reduce-index]]))
+            [gauss-seidel.helpers :refer [without reduce-index]]))
 
 (def MAX-ITERATIONS 498) ; Real number of iterations: 500
 
@@ -13,14 +12,15 @@
 ;; For each pair of [previous x, current x], compute its error.
 ;; compute-errs :: List Float -> List Float -> List Float
 (defn compute-errs [prev-xs curr-xs]
-  (->> (zip curr-xs prev-xs #(/ (- %1 %2) %1))
-       (map (comp (partial * 100) js/Math.abs))))
+  (let [divide #(/ (- %1 %2) %1)]
+    (map (comp (partial * 100) js/Math.abs divide)
+         curr-xs prev-xs)))
 
 ;; Take the current values of x (without the cleared variable) and
 ;; multiply them with their corresponding right side coefficient.
-;; substitute :: Int -> List Float -> List Float -> List Float
+;; substitute :: List Float -> List Float -> List Float
 (defn substitute [xs right-side]
-  (zip right-side xs *))
+  (map * right-side xs))
 
 ;; Given an equation and the current values of x, isolate the nth variable
 ;; by taking it away from xs and the right side of the isolation, then
@@ -31,18 +31,18 @@
         comps      (:comps equation)
         divisor    (nth comps n)
         right-side (->> comps
-                        (remove-at n)
+                        (without n)
                         (map (partial * -1))
-                        (substitute (remove-at n xs)))]
+                        (substitute (without n xs)))]
     (/ (reduce + indep right-side) divisor)))
 
 ;; Isolate the nth variable and return updated the values of x.
-;; update-xs :: List Float -> Equation -> Int
+;; update-xs :: List Float -> Equation -> Int -> List float
 (defn update-xs [xs equation n]
   (->> (isolate equation n xs)
        (assoc xs n)))
 
-;; Take the current values of x to compute a new set of values of x
+;; Take the current values of x to compute a new set of values of x.
 ;; compute-xs :: Diagonal -> List Float -> List Float
 (defn compute-xs [diagonal xs]
   (let [num-eqs (count diagonal)]
@@ -53,8 +53,8 @@
 ;; their current errors that determine when the iteration should stop.
 ;; solve-system :: Diagonal -> Iterated-Table
 (defn solve-system [tolerance diagonal]
-  (loop [xs    (-> diagonal count (filled-range 0))
-         errs  (-> diagonal count (filled-range "N/A"))
+  (loop [xs    (-> diagonal count (repeat 0) vec)
+         errs  (-> diagonal count (repeat "N/A") vec)
          table [[0 xs errs]]
          i     0]
     (let [new-xs    (compute-xs diagonal xs)
