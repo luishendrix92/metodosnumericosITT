@@ -5,8 +5,6 @@
             [gauss-seidel.table :refer [table]]
             [reagent.core :as r]))
 
-(enable-console-print!)
-
 (defn app []
   [:div {:class "columns"}
    ;; Modals
