@@ -1,19 +1,17 @@
 (ns gauss-seidel.events
-  (:require [gauss-seidel.parser :refer [eq-pattern whitespace]]
-            [gauss-seidel.system :refer [make-diagonal]]
-            [gauss-seidel.solver :refer [MAX-ITERATIONS]]
-            [gauss-seidel.solver :refer [solve-system]]
-            [gauss-seidel.parser :refer [parse-eq]]
+  (:require [gauss-seidel.parser   :refer [eq-pattern whitespace]]
+            [gauss-seidel.system   :refer [make-diagonal]]
+            [gauss-seidel.solver   :refer [MAX-ITERATIONS]]
+            [gauss-seidel.solver   :refer [solve-system]]
+            [gauss-seidel.parser   :refer [parse-eq]]
             [gauss-seidel.appstate :refer [equations error
                                            solution  modal-state]]))
 
 (defn open-modal [target-modal]
-  (fn []
-    (swap! modal-state assoc target-modal true)))
+  (fn [] (swap! modal-state assoc target-modal true)))
 
 (defn close-modal [target-modal]
-  (fn []
-    (swap! modal-state assoc target-modal false)))
+  (fn [] (swap! modal-state assoc target-modal false)))
 
 (defn show-solution [event]
   (let [diagonal (->> @equations (map parse-eq) make-diagonal)]
@@ -31,7 +29,7 @@
     (set! (.-value err) "")))
 
 (defn add-equation [event]
-  (let [eq (js/document.getElementById "eq")
+  (let [eq       (js/document.getElementById "eq")
         eq-clean (-> eq .-value (clojure.string/replace whitespace ""))]
     (if-not (re-matches eq-pattern eq-clean)
       ((open-modal :bad-format))

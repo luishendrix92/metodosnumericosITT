@@ -1,6 +1,6 @@
 (ns gauss-seidel.eqlist
-  (:require [gauss-seidel.appstate :refer [equations solution]]
-            [gauss-seidel.events :refer [show-solution open-modal clear]]))
+  (:require [components.appstate :refer [equations solution]]
+            [components.events   :refer [show-solution open-modal clear]]))
 
 (defn equation-list []
   [:div {:class "card eq-list"}

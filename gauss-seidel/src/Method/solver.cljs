@@ -1,5 +1,5 @@
 (ns gauss-seidel.solver
-  (:require [gauss-seidel.system :refer [make-diagonal]]
+  (:require [gauss-seidel.system  :refer [make-diagonal]]
             [gauss-seidel.helpers :refer [without reduce-index]]))
 
 (def MAX-ITERATIONS 498) ; Real number of iterations: 500
