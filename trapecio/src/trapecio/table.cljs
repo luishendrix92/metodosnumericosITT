@@ -1,16 +1,17 @@
 (ns trapecio.table)
 
-(defn table [state]
+(defn table [res-table]
   [:div.pane
    [:table.table-striped
     [:thead
      [:tr
-      [:th "X" [:sub "i"]]
-      [:th "f(x" [:sub "i"] ") evaluated"]
-      [:th "Ef(x" [:sub "i"] ")"]]]
-    [:tbody (for [[i fxi] (map-indexed vector (:segments @state))]
-              (when (or (odd? i))
-                ^{:key i} [:tr
-                           [:td (inc i)]
-                           [:td fxi]
-                           [:td (- (:real-integral @state) fxi)]]))]]])
+      [:th "n"]
+      [:th "Approx Value"]
+      [:th "Err"]
+      [:th "Err %"]]]
+    [:tbody (for [[i val err errp] @res-table]
+              ^{:key i} [:tr
+                         [:td i]
+                         [:td val]
+                         [:td err]
+                         [:td (str errp "%")]])]]])

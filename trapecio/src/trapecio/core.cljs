@@ -5,11 +5,12 @@
             [reagent.core     :as    r]))
 
 (defn app []
-  (let [state (r/atom {})]
+  (let [res-table (r/atom [])
+        last-row  (r/atom {})]
     (fn []
       [:div.pane-group
-       [sidebar state]
-       [results-pane state]
-       [table state]])))
+       [sidebar last-row res-table]
+       [results-pane last-row]
+       [table res-table]])))
 
 (r/render [app] (js/document.getElementById "app"))
