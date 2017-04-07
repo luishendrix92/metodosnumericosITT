@@ -1,5 +1,5 @@
 (defproject trapecio "1.0.0"
-  :description "Numerical Integration using the Trapeze Method"
+  :description "Numerical Integration using the Trapezoidal Rule"
   :url "https://github.com/luishendrix92/metodosnumericosITT/tree/master/trapecio"
   :license {:name "MIT License"
             :url "https://opensource.org/licenses/MIT"}
