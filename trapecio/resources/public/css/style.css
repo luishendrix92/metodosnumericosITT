@@ -38,3 +38,21 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.real, .approx, .err {
+  display: inline-block;
+  font-weight: bold;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
+.real {
+  background-color: #d1e6db;
+}
+.approx {
+  background-color: #f3f7d0;
+}
+.err {
+  background-color: #e67d91;
+  color: white;
+}

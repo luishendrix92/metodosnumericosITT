@@ -19,7 +19,7 @@
             <div class="btn-group pull-right">
               <button class="btn btn-default">
                 <span class="icon icon-github icon-text"></span>
-                <a href="https://www.codetuts.tech">Github Repo</a>
+                <a href="https://github.com/luishendrix92/metodosnumericosITT/tree/master/trapecio">Github Repo</a>
               </button>
               <button class="btn btn-default icon-text">
                 <span class="icon icon-globe icon-text"></span>
@@ -29,57 +29,7 @@
           </div>
         </header>
         
-        <div class="window-content">
-          <div class="pane-group">
-            <div class="pane-sm sidebar">
-              <form>
-                <div class="form-group">
-                  <label for="">Number of segments</label>
-                  <input type="number" class="form-control" min="2" max="1000" value="2">
-                </div>
-                <div class="form-group">
-                  <label>Start (a)</label>
-                  <input type="text" class="form-control" placeholder="First x axis value">
-                </div>
-                <div class="form-group">
-                  <label>End (b)</label>
-                  <input type="text" class="form-control" placeholder="Last x axis value">
-                </div>
-              </form>
-              <button class="btn btn-form btn-default">Defaults</button>
-              <button class="btn btn-form btn-primary">Integrate</button>
-            </div>
-            
-            <div class="pane results">
-              <h4>Analytic Integral</h4>
-              <p>f(x) = 0.2x + 25x<sup>2</sup>/2 - 200x<sup>3</sup>/3 + 675x<sup>4</sup>/4 - 900x<sup>5</sup>/5 + 400x<sup>6</sup>/6</p>
-              <p>I = ???</p>
-              
-              <h4>Approximated Integration</h4>
-              <p>I ≈ ???</p>
-              
-              <h4>The Error</h4>
-              <p>E = ???</p>
-            </div>
-            
-            <div class="pane">
-              <table class="table-striped">
-                <thead>
-                  <tr>
-                    <th>X<sub>i</sub></th>
-                    <th>f(x<sub>i</sub>) evaluated</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>photon.css</td>
-                    <td>CSS</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <div class="window-content" id="app"></div>
       </div>
     </div>
     

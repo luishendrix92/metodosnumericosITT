@@ -1,7 +1,15 @@
 (ns trapecio.core
-  (:require [trapecio.method :refer [solve-integral]]))
+  (:require [trapecio.sidebar :refer [sidebar]]
+            [trapecio.results :refer [results-pane]]
+            [trapecio.table   :refer [table]]
+            [reagent.core     :as    r]))
 
-(enable-console-print!)
+(defn app []
+  (let [state (r/atom {})]
+    (fn []
+      [:div.pane-group
+       [sidebar state]
+       [results-pane state]
+       [table state]])))
 
-(println
-  (solve-integral 0 0.8 2))
+(r/render [app] (js/document.getElementById "app"))
