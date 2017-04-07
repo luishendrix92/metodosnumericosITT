@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "photon-entypo";
+    src: url("photon-entypo.ttf") format("truetype");
+}
+
+body {
+  background: #DDDDDD;
+}
+
+.centerfix {
+  width: 700px;
+  height: 500px;
+}
+
+.sidebar, .results {
+  padding: 20px 15px;
+}
+
+.func {
+  margin-left: 10px;
+}
+
+.func em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+table thead th {
+  font-weight: bold;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -27,7 +27,7 @@
     (println separador))
   (let [[_ _ _ xr _ ea] (peek tabla)]
     (println (str "\nLa raíz aproximada es Xr: " xr
-                  "y el error Ea: " ea "."))))
+                  " y el error Ea: " ea "."))))
 
 (defn iniciar []
   (println "Introduce los valores de Xa y Xb:")
