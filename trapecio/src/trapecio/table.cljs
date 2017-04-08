@@ -14,4 +14,4 @@
                          [:td i]
                          [:td val]
                          [:td err]
-                         [:td (str errp "%")]])]]])
+                         [:td (str errp " %")]])]]])
