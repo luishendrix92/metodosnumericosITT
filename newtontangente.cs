@@ -16,7 +16,7 @@ public static class NewtonRaphson {
   static double f(double x) {
     return Math.Pow(Math.E, x * -1) - x;
   }
-  
+ 
   static double fPrima(double x) {
     return (Math.Pow(Math.E, x * -1) * -1) - 1;
   }
