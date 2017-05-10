@@ -1,7 +1,7 @@
 (ns lineari.core
-  (:require [lineari.helpers   :refer :all]
+  (:require [lineari.helpers   :refer [first-match]]
             [lineari.equations :refer [lineal-interp]]
-            [clojure.string    :refer [join]])
+            [lineari.ioparser  :refer :all])
   (:use [incanter core charts]))
 
 ;; Anotates each provided point below the generated plot with Incanter
@@ -29,17 +29,16 @@
                        ((:line segment) x))]
       (str "Prediction for " x " -> " prediction))))
 
-;; main :: () -> Eff Incanter Plot Window <IO Write>
-(defn main []
-  (let [parsed-file        (-> "input.txt" file-lines parse-values)
-        [xs ys to-predict] parsed-file
+;; -main :: Arg Strings -> Eff Incanter Plot Window <IO Write>
+(defn -main [in-filename out-filename & args]
+  (let [[xs ys to-predict] (-> in-filename file-lines parse-values)
         interpolated       (lineal-interp xs ys)
         plot               (plot-lines interpolated)]
-    (view (show-points plot xs ys))
+    (-> plot (set-title "Linear Interpolation") (show-points xs ys) view)
     (->> to-predict
          (map (predict interpolated))
-         (join "\n")
-         (spit (str ROOT_DIR "output.txt")))))
+         (clojure.string/join "\n")
+         (spit (str ROOT_DIR out-filename)))))
 
 ;; type alias LinearFunction :: Map ::
 ;; {:line Float -> Float

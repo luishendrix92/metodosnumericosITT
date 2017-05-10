@@ -13,7 +13,7 @@
 
 ;; Returns a function that evaluates a point to predict in the X-axis and
 ;; assembles a string to be written in a file with its correspondant Y value.
-;; predict :: (Float -> Float) -> (Float -> Strint)
+;; predict :: (Float -> Float) -> (Float -> String)
 (defn predict [interpolation]
   (fn [x] (str "Prediction for " x " -> " (interpolation x))))
 

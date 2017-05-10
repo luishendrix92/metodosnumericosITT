@@ -1,2 +1,5 @@
-Prediction for 5 -> 16/3
-Prediction for 4 -> 20/3
+Prediction for -1.7 -> 4.9
+Prediction for -0.5 -> 3.35
+Prediction for -1.5 -> 4.7
+Prediction for 0.2 -> 2.7800000000000002
+Prediction for 1.2 -> 7.999999999999999
