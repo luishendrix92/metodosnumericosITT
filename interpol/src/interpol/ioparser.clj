@@ -14,5 +14,5 @@
 ;; parse-values :: <IO Read> List String -> List List Float
 (defn parse-values [lines]
   (let [parse-nums (partial map read-string)
-        get-nums    #(split % #"\s+")]
+        get-nums   #(split % #"\s+")]
     (map (comp parse-nums get-nums) lines)))

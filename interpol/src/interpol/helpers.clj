@@ -1,21 +1,19 @@
 (ns interpol.helpers)
 
-;; Returns a set of coordinates to update on a given m x n matrix where
-;; the coordinates are given as [x, y] or [i, j]. If the user wants, the
-;; order of the triangular traversal can be reversed so that instead of
-;; following the "row by row" order, it follows a "column by column" one.
-;; triangular-paths :: Int -> Bool -> Vector Coord
-(defn triangular-paths [n rev?]
-  (for [i (range n), j (range n)
+;; Returns a set of coordinates to update on a given MxN matrix where the
+;; coordinates are given as [x, y] or [i, j] following a triangular order.
+;; triangular-paths :: Int -> List Coord
+(defn triangular-paths [n]
+  (for [i (range 1 n), j (range n)
         :when (< i (- n j))]
-    (if rev? [j i] [i j])))
+    [j i]))
 
 ;; Maps only the upper triangle in a given matrix following a column-traversal
-;; or a row-traversal order and passing the matrix to the function, along with
-;; the current coordinates in the matrix, returning the new cell values.
-;; tri-map :: Matrix -> Bool -> (Matrix -> Coord -> Matrix) -> Matrix
-(defn tri-map [matrix rev? f]
-  (let [paths (triangular-paths (count matrix) rev?)]
+;; passing the matrix to the function, along with the current coordinates in
+;; the matrix, returning the new cell values. (Ignores the First Column)
+;; tri-map :: Matrix -> (Coord -> Matrix -> Matrix) -> Matrix
+(defn tri-map [matrix f]
+  (let [paths (triangular-paths (count matrix))]
     (reduce #(assoc-in %1 %2 (f %2 %1)) matrix paths)))
 
 ;; gen-matrix :: Int -> Matrix

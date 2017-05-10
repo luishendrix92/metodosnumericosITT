@@ -1,7 +1,7 @@
 (ns interpol.newton
   (:require [interpol.helpers :refer [tri-map gen-matrix transpose]]))
 
-;; Applies the formula for Newton's divided difference
+;; Applies the formula for Newton's divided difference.
 ;; divided-difference :: Float -> Float -> Float -> Float -> Float
 (defn divided-difference [fxi fxj xi xj]
   (/ (- fxi fxj)
@@ -14,20 +14,16 @@
 (defn divided-differences [xs ys]
   (let [num-xs            (count xs)
         triangular-matrix (->> (gen-matrix num-xs num-xs)
-                               (concat [ys])
-                               (into [])
+                               (concat [ys]) (into [])
                                transpose)]
-    (tri-map triangular-matrix true
+    (tri-map triangular-matrix
              (fn [[i j :as path] matrix]
-               (if (zero? j) ; Ignore first col
-                 (get-in matrix path)
-                 (divided-difference
-                   (get-in matrix [(inc i) (dec j)])
-                   (get-in matrix [i (dec j)])
-                   (nth xs (+ i j))
-                   (nth xs i)))))))
+               (divided-difference
+                 (get-in matrix [(inc i) (dec j)])
+                 (get-in matrix [i (dec j)])
+                 (nth xs (+ i j)) (nth xs i))))))
 
-;; Assembles an nth term of the resultant polynomial
+;; Assembles an "ith" term of the resultant polynomial.
 ;; make-term :: List Float -> Float -> List Float -> (Int -> Float)
 (defn make-term [xs x differences]
   (fn [i] (* (nth differences i)
@@ -38,6 +34,6 @@
 ;; interpolate :: List Float -> List Float -> (Float -> Float)
 (defn interpolate [xs ys]
   (let [differences (first (divided-differences xs ys))]
-    (fn [x] (let [terms (->> (range (count xs))
-                             (map (make-term xs x differences)))]
-              (apply + terms)))))
+    (fn [x] (->> (range (count xs))
+                 (map (make-term xs x differences))
+                 (apply +)))))
