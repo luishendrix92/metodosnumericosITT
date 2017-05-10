@@ -8,9 +8,7 @@
 (defn triangular-paths [n rev?]
   (for [i (range n), j (range n)
         :when (< i (- n j))]
-    (if rev?
-      [j i]
-      [i j])))
+    (if rev? [j i] [i j])))
 
 ;; Maps only the upper triangle in a given matrix following a column-traversal
 ;; or a row-traversal order and passing the matrix to the function, along with
@@ -18,10 +16,7 @@
 ;; tri-map :: Matrix -> Bool -> (Matrix -> Coord -> Matrix) -> Matrix
 (defn tri-map [matrix rev? f]
   (let [paths (triangular-paths (count matrix) rev?)]
-    (reduce
-      #(assoc-in %1 %2 (f %2 %1))
-      matrix
-      paths)))
+    (reduce #(assoc-in %1 %2 (f %2 %1)) matrix paths)))
 
 ;; gen-matrix :: Int -> Matrix
 (defn gen-matrix [m n]

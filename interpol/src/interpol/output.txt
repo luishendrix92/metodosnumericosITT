@@ -1,0 +1,4 @@
+Prediction for 1.2 -> 0.6073107046399999
+Prediction for 4.5 -> 0.1231719970703122
+Prediction for 5.8 -> -0.07780284416000051
+Prediction for 7.3 -> -0.24864251373969365
