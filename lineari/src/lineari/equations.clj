@@ -17,8 +17,11 @@
        (map make-line)))
 
 ;; type alias LinearFunction :: Map ::
-;; type alias Point          :: Vector [Float Float]
+;; {:line Float -> Float
+;;  :a    Float
+;;  :b    Float}
 ;; type alias Segment        :: Vector [Point Point]
 ;; {:line Float -> Float
 ;;  :a    Float
 ;;  :b    Float}
+;; type alias Point          :: Vector [Float Float]
