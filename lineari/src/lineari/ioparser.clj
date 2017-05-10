@@ -1,5 +1,5 @@
 (ns lineari.ioparser
-  (:require [clojure.string :refer [split trim]]))
+  (:require [clojure.string :refer [split trim join]]))
 
 (def ROOT_DIR "src/lineari/")
 
@@ -16,3 +16,8 @@
   (let [parse-nums (partial map read-string)
         get-nums   #(split % #"\s+")]
     (map (comp parse-nums get-nums trim) lines)))
+
+;; Joins a list of string file lines and appends a new line at the end.
+;; assemble-file :: List String -> String
+(defn assemble-file [data]
+  (str (join "\n" data) "\n"))

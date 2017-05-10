@@ -22,12 +22,11 @@
 ;; segment and returns its interpolated y coordinate prediction.
 ;; predict :: List LinearFunction -> (Float -> String)
 (defn predict [lines]
-  (fn [x]
-    (let [segment    (first-match #(<= (:a %) x (:b %)) lines)
-          prediction (if (= segment :nothing)
-                       "No prediction, segment not found"
-                       ((:line segment) x))]
-      (str "Prediction for " x " -> " prediction))))
+  (fn [x] (let [segment    (first-match #(<= (:a %) x (:b %)) lines)
+                prediction (if (= segment :nothing)
+                             "No prediction, segment not found"
+                             ((:line segment) x))]
+            (str "Prediction for " x " -> " prediction))))
 
 ;; -main :: Arg Strings -> Eff Incanter Plot Window <IO Write>
 (defn -main [in-filename out-filename & args]
@@ -37,7 +36,7 @@
     (-> plot (set-title "Linear Interpolation") (show-points xs ys) view)
     (->> to-predict
          (map (predict interpolated))
-         (clojure.string/join "\n")
+         assemble-file
          (spit (str ROOT_DIR out-filename)))))
 
 ;; type alias LinearFunction :: Map ::

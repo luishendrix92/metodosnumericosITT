@@ -1,7 +1,6 @@
 (ns interpol.core
   (:require [interpol.newton   :refer [interpolate]]
-            [interpol.ioparser :refer :all]
-            [clojure.string    :refer [join]])
+            [interpol.ioparser :refer :all])
   (:use [incanter core charts]))
 
 ;; Anotates each provided point below the generated plot with Incanter
@@ -17,18 +16,14 @@
 (defn predict [interpolation]
   (fn [x] (str "Prediction for " x " -> " (interpolation x))))
 
-;; Displays the generated interpolated function already plotted thanks to the Incanter
-;; library and with its anotated points. Then it writes to a file called output.txt the
-;; results of the predictions from the given points in the input.txt file.
-;; main :: () -> Eff Incanter Plot Window <IO Write>
-(defn main []
-  (let [parsed-file        (-> "input.txt" file-lines parse-values)
-        [xs ys to-predict] parsed-file
+;; -main :: Arg Strings -> Eff Incanter Plot Window <IO Write>
+(defn -main [in-filename out-filename & args]
+  (let [[xs ys to-predict] (-> in-filename file-lines parse-values)
         interpolated       (interpolate xs ys)
         [start end]        [(apply min xs) (apply max xs)]
         plot               (function-plot interpolated start end)]
-    (view (show-points plot xs ys))
+    (-> plot (set-title "Cubic Newton Interpolation") (show-points xs ys) view)
     (->> to-predict
          (map (predict interpolated))
-         (join "\n")
-         (spit (str ROOT_DIR "output.txt")))))
+         assemble-file
+         (spit (str ROOT_DIR out-filename)))))
