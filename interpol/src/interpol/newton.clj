@@ -13,11 +13,11 @@
 ;; divided-differences :: List Float -> List Float -> Matrix Float
 (defn divided-differences [xs ys]
   (let [num-xs            (count xs)
-        triangular-matrix (->> (gen-matrix num-xs num-xs)
+        triangular-matrix (->> (gen-matrix (dec num-xs) num-xs)
                                (concat [ys]) (into [])
                                transpose)]
     (tri-map triangular-matrix
-             (fn [[i j :as path] matrix]
+             (fn [[i j] matrix]
                (divided-difference
                  (get-in matrix [(inc i) (dec j)])
                  (get-in matrix [i (dec j)])
@@ -30,7 +30,7 @@
              (reduce * 1 (map #(- x (nth xs %)) (range i))))))
 
 ;; Computes a polynomial that passes through all the given points and
-;; approximates the other possible values of f(x) within the interval
+;; approximates the other possible values of f(x) within the interval.
 ;; interpolate :: List Float -> List Float -> (Float -> Float)
 (defn interpolate [xs ys]
   (let [differences (first (divided-differences xs ys))]

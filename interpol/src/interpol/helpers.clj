@@ -4,7 +4,7 @@
 ;; coordinates are given as [x, y] or [i, j] following a triangular order.
 ;; triangular-paths :: Int -> List Coord
 (defn triangular-paths [n]
-  (for [i (range 1 n), j (range n)
+  (for [i (range 1 n) j (range n)
         :when (< i (- n j))]
     [j i]))
 
